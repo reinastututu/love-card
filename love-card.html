@@ -27,10 +27,34 @@
     </p>
 
 <div class="controls">
-  <input type="text" id="nameInput" placeholder="Enter your name">
   <button onclick="startCard()">Show Love</button>
 </div>
 <div id="loveMessage" class="hidden"></div>
+<script>
+const messages = [
+  "Hi Luluk! 💖",
+  "You are incredibly special 🌸",
+  "Wishing you endless happiness 🥰",
+  "With love, always ❤️"
+];
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function startCard() {
+  const messageBox = document.getElementById("loveMessage");
+  messageBox.classList.remove("hidden");
+  messageBox.innerHTML = "";
+
+  for (let msg of messages) {
+    messageBox.innerHTML = `<p>${msg}</p>`;
+    await delay(2000);
+  }
+
+  messageBox.innerHTML += `<p>🌹 From your secret admirer</p>`;
+}
+</script>
+    
   </body>
 </html>
