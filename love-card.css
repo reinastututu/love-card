@@ -1,6 +1,16 @@
-/*
-* Section for specifying the style of native HTML tags
-*/
+.controls {
+  margin-top: 20px;
+  text-align: center;
+}
+input, button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+}
+.hidden {
+  display: none;
+}
+
 body {
   background-image: url('background-photo-hearts-1-612x612.jpg');
  }
