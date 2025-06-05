@@ -1,60 +1,231 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Project 3</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
-    <link rel="stylesheet" href="love-card.css">
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Card</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <h1> I love you!</h1>
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-family: 'Kaushan Script', cursive;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+      margin: 30px auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    p {
+      font-size: 1.8rem;
+      background-color: rgba(173, 216, 230, 0.85);
+      text-align: center;
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.6;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .controls {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    button {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      font-family: 'Kaushan Script', cursive;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    button:hover, button:focus {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      outline: none;
+    }
+
+    button:disabled {
+      background: #ccc;
+      transform: none;
+      cursor: not-allowed;
+    }
+
+    #loveMessage {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 800px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    #loveMessage p {
+      font-size: 2rem;
+      background: none;
+      padding: 10px;
+      margin: 10px 0;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .signature {
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 2.2rem;
+      color: #ff416c;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      h1, p, #loveMessage {
+        max-width: 95%;
+        margin: 15px auto;
+      }
+      
+      h1 {
+        font-size: 2rem;
+        padding: 15px;
+      }
+      
+      p {
+        font-size: 1.5rem;
+        padding: 20px;
+      }
+      
+      button {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+      }
+      
+      #loveMessage p {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>I love you!</h1>
+  
+  <p>
+    You probably wonder why I love you…
+    <br>
+    And that's ok.
+    <br>
+    What you really don't know is that I ask myself that question every single day. Every day I find new reasons for loving you even more. It's sad that you don't love me the same way but this feeling is awesome and I won't stop.
+    <br>
+    Thank you for everything that you are doing for me.
     <br>
     <br>
-    <p>You probably wonder why I love you…
-      <br>
-      And that’s ok.
-      <br>
-      What you really don’t know is that I ask myself that question every single day. Every day  I find new reasons for loving you even more. It’s sad that you don’t love me the same way but this feeling is awesome and I won’t stop.
-      <br>
-      Thank you for everything that you are doing for me.
-      <br>
-      <br>
-      Truly yours ,
-      MyLove.
-    </p>
+    Truly yours,
+    <span class="signature">MyLove</span>
+  </p>
 
-<div class="controls">
-  <button onclick="startCard()">Show Love</button>
-</div>
-<div id="loveMessage" class="hidden"></div>
-<script>
-const messages = [
-  "Hi Luluk! 💖",
-  "You are incredibly special 🌸",
-  "Wishing you endless happiness 🥰",
-  "With love, always ❤️"
-];
+  <div class="controls">
+    <button id="loveButton">Show Love</button>
+  </div>
+  
+  <div id="loveMessage" class="hidden"></div>
 
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  <script>
+    const messages = [
+      "Hi Luluk! 💖",
+      "You are incredibly special 🌸",
+      "Wishing you endless happiness 🥰",
+      "With love, always ❤️"
+    ];
 
-async function startCard() {
-  const messageBox = document.getElementById("loveMessage");
-  messageBox.classList.remove("hidden");
-  messageBox.innerHTML = "";
+    const loveButton = document.getElementById("loveButton");
+    const messageBox = document.getElementById("loveMessage");
 
-  for (let msg of messages) {
-    messageBox.innerHTML = `<p>${msg}</p>`;
-    await delay(2000);
-  }
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-  messageBox.innerHTML += `<p>🌹 From your secret admirer</p>`;
-}
-</script>
-    
-  </body>
+    async function startCard() {
+      // Disable button during animation
+      loveButton.disabled = true;
+      loveButton.textContent = "Sending love...";
+      
+      // Show message box
+      messageBox.classList.remove("hidden");
+      messageBox.innerHTML = "";
+      
+      try {
+        // Display messages with fade-in effect
+        for (let msg of messages) {
+          messageBox.innerHTML = `<p>${msg}</p>`;
+          await delay(2000);
+        }
+        
+        // Add final message
+        messageBox.innerHTML += `<p class="signature">🌹 From your secret admirer</p>`;
+        await delay(1000);
+        
+        // Confetti celebration
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        
+      } catch (error) {
+        console.error("Error:", error);
+        messageBox.innerHTML = `<p>Something went wrong: ${error.message}</p>`;
+      } finally {
+        // Re-enable button
+        loveButton.textContent = "Show Love Again";
+        loveButton.disabled = false;
+      }
+    }
+
+    // Add event listener
+    loveButton.addEventListener("click", startCard);
+  </script>
+</body>
 </html>
