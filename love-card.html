@@ -173,6 +173,9 @@
   <div id="loveMessage" class="hidden"></div>
 
   <script>
+    // FIXED: Proper event handler attachment
+    document.getElementById("loveButton").addEventListener("click", startCard);
+    
     const messages = [
       "Hi Luluk! 💖",
       "You are incredibly special 🌸",
@@ -180,14 +183,14 @@
       "With love, always ❤️"
     ];
 
-    const loveButton = document.getElementById("loveButton");
-    const messageBox = document.getElementById("loveMessage");
-
     function delay(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     async function startCard() {
+      const loveButton = document.getElementById("loveButton");
+      const messageBox = document.getElementById("loveMessage");
+      
       // Disable button during animation
       loveButton.disabled = true;
       loveButton.textContent = "Sending love...";
@@ -197,13 +200,11 @@
       messageBox.innerHTML = "";
       
       try {
-        // Display messages with fade-in effect
         for (let msg of messages) {
           messageBox.innerHTML = `<p>${msg}</p>`;
           await delay(2000);
         }
         
-        // Add final message
         messageBox.innerHTML += `<p class="signature">🌹 From your secret admirer</p>`;
         await delay(1000);
         
@@ -213,19 +214,11 @@
           spread: 70,
           origin: { y: 0.6 }
         });
-        
-      } catch (error) {
-        console.error("Error:", error);
-        messageBox.innerHTML = `<p>Something went wrong: ${error.message}</p>`;
       } finally {
-        // Re-enable button
         loveButton.textContent = "Show Love Again";
         loveButton.disabled = false;
       }
     }
-
-    // Add event listener
-    loveButton.addEventListener("click", startCard);
   </script>
 </body>
 </html>
